@@ -8,15 +8,15 @@ function insertLivre(PDO $con, array $datas): bool
 {
     // On vérifie que l'email est valide
     // filter_var retourne false si l'email est incorrect
-    $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
+    $email = filter_var($datas['email'], FILTER_VALIDATE_EMAIL);
 
     // On nettoie le titre (supprime les balises HTML et les espaces)
-    $title = strip_tags($_POST['title']);
+    $title = strip_tags($datas['title']);
     $title = trim($title);
     $title = htmlspecialchars($title);
 
     // On nettoie le texte du commentaire
-    $text = htmlspecialchars(trim(strip_tags($_POST['text'])));
+    $text = htmlspecialchars(trim(strip_tags($datas['text'])));
 
     // Si un des champs est invalide ou vide, on arrête et on retourne false
     if ($email === false || empty($title) || empty($text)) {
